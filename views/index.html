@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+</head>
+<body>
+    <h1>这是一个html文件</h1>
+    <h2>{{ title }}</h2>
+    <!-- 判断年龄，显示不同内容 -->
+    {{if age<25 }}
+        <p>我是{{name}},今年{{age}}岁,很高兴认识同学们 </p>
+    {{/if}}
+    {{if age>=25 }}
+        <p>我是{{name}},今年{{age}}岁
+            {{if happy}},很高兴认识大家
+            {{/if}} 
+        </p>
+    {{/if}}
+</body>
+</html>
