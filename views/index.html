@@ -4,20 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <title>许愿墙</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <h1>这是一个html文件</h1>
-    <h2>{{ title }}</h2>
-    <!-- 判断年龄，显示不同内容 -->
-    {{if age<25 }}
-        <p>我是{{name}},今年{{age}}岁,很高兴认识同学们 </p>
-    {{/if}}
-    {{if age>=25 }}
-        <p>我是{{name}},今年{{age}}岁
-            {{if happy}},很高兴认识大家
-            {{/if}} 
-        </p>
-    {{/if}}
+   <h2 class="title">快来写上您的愿望吧</h2>
+   <!-- JS动态填入数据，使用data-list属性，将列表传入页面上 -->
+   <div id="container" data-list="{{list}}"></div>
+   <!-- 添加许愿表单 -->
+   <form action="add" method="post">
+       <!-- 许愿者姓名 -->
+       <input type="text" class="input" id="name" name="name" placeholder="昵称"> 
+       <!-- 许愿内容 -->
+       <input type="text" class="input" id="content" name="content" placeholder="许个愿吧">
+       <!-- 提交 -->
+       <button class="submit" type="submit">提交</button>
+   </form>
+   <script src="/js/jquery-3.4.1.min.js"></script>
+   <script src="/js/index.js"></script>
 </body>
+<script>
+    var container;
+    var colors = ['#207de0','#43baec','#e3e197','#6cde47','#ecc733'];
+    var creatItem = function (name, content) {
+        var color = colors[parseInt (Math.random()*5)];
+        $('<div class="item"><p>' + name + ": </p><p>"
+            + content + '</p><a href="#">关闭</a></div>')
+            .css({'background':color}).appendTo(container).drag();
+    }
+    var list = container.attr('data-list');
+    //循环遍历list,创建便签
+    $.each(JSON.parse(list), function (i,v) {
+        createItem (v.item, v.content);
+    })
+</script>
 </html>
